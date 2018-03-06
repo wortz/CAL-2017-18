@@ -43,7 +43,18 @@ static void sortByY(vector<Point> &v, int left, int right)
  */
 Result nearestPoints_BF(vector<Point> &vp) {
 	Result res;
-	// TODO
+	double d;
+	for(unsigned int i=0;i<vp.size();i++){
+		for(unsigned int j=i+1;j<vp.size();j++){
+			d=vp[i].distance(vp[j]);
+			if(d<res.dmin)
+			{
+				res.dmin=d;
+				res.p1=vp[i];
+				res.p2=vp[j];
+			}
+		}
+	}
 	return res;
 }
 
@@ -75,8 +86,14 @@ static void npByY(vector<Point> &vp, int left, int right, Result &res)
  * using at most numThreads.
  */
 static Result np_DC(vector<Point> &vp, int left, int right, int numThreads) {
+	Result res;
+	double med=(vp[0].x+vp[vp.size()-1].x)/2.0;
 	// Base case of two points
-	// TODO
+	if(vp.size()==2){
+		res.dmin=(vp[0].distance(vp[1]));
+		res.p1=vp[0];
+		res.p2=vp[1];
+	}
 
 	// Base case of a single point: no solution, so distance is MAX_DOUBLE
 	// TODO
@@ -98,7 +115,7 @@ static Result np_DC(vector<Point> &vp, int left, int right, int numThreads) {
 	// TODO
 
 	// Reorder points in strip area back by X coordinate
-	TODO
+	//TODO
 
 	return res;
 }
