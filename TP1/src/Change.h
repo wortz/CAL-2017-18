@@ -17,4 +17,7 @@
  * */
 string calcChange(int m, int numCoins, int *coinValues);
 
+
+int minCoins(int i,int k,int *coins);
+
 #endif /* CHANGE_H_ */

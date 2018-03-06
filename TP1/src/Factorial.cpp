@@ -16,8 +16,8 @@ int factorialRecurs(int n)
 
 int factorialDinam(int n)
 {
-	static vector<int> answers = {1 , 1};
-	if (n >= answers.size()){
+	static vector<int> answers = {1,1};
+	if (n >= (int)answers.size()){
 			for (int i=answers.size() ; i<=n ; i++){
 				answers.push_back(i*answers.at(i-1));
 			}
