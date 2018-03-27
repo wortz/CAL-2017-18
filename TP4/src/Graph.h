@@ -94,7 +94,7 @@ Vertex<T> * Graph<T>::findVertex(const T &in) const {
 template <class T>
 bool Graph<T>::addVertex(const T &in) {
 	// TODO (4 lines)
-	if(findVertex(in)!=NULL){
+	if(findVertex(in)==NULL){
 		vertexSet.push_back(new Vertex<T>(in));
 		return true;
 	}
@@ -111,6 +111,11 @@ bool Graph<T>::addVertex(const T &in) {
 template <class T>
 bool Graph<T>::addEdge(const T &sourc, const T &dest, double w) {
 	// TODO (6 lines)
+	Vertex<T> *s,*d;
+	if((s=findVertex(sourc))!=NULL&&(d=findVertex(dest))!=NULL){
+		s->addEdge(d,w);
+		return true;
+	}
 	// HINT: use findVertex to obtain the actual vertices
 	// HINT: use the next function to actually add the edge
 	return false;
@@ -123,7 +128,7 @@ bool Graph<T>::addEdge(const T &sourc, const T &dest, double w) {
 template <class T>
 void Vertex<T>::addEdge(Vertex<T> *d, double w) {
 	// TODO (1 line)
-
+	this->adj.push_back(Edge<T>(d,w));
 }
 
 
@@ -137,6 +142,10 @@ void Vertex<T>::addEdge(Vertex<T> *d, double w) {
 template <class T>
 bool Graph<T>::removeEdge(const T &sourc, const T &dest) {
 	// TODO (5 lines)
+	Vertex<T> *s,*d;
+	if((s=findVertex(sourc))!=NULL&&(d=findVertex(dest))!=NULL){
+			return (s->removeEdgeTo(d));
+		}
 	// HINT: Use "findVertex" to obtain the actual vertices.
 	// HINT: Use the next function to actually remove the edge.
 	return false;
@@ -150,6 +159,11 @@ bool Graph<T>::removeEdge(const T &sourc, const T &dest) {
 template <class T>
 bool Vertex<T>::removeEdgeTo(Vertex<T> *d) {
 	// TODO (6 lines)
+	for (int i=0;i<this->adj.size();i++)
+		if(this->adj.at(i).dest->info==d->info){
+			this->adj.erase(adj.begin()+i);
+			return true;
+		}
 	// HINT: use an iterator to scan the "adj" vector and then erase the edge.
 	return false;
 }
