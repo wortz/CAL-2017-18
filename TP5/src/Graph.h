@@ -186,6 +186,7 @@ void Graph<T>::dijkstraShortestPath(const T &origin) {
 	q.insert(this->findVertex(origin));
 	while(!q.empty()) {
 		Vertex<T>* v=q.extractMin();
+		v->processing=false;
 		v->visited=true;
 		for(auto it:v->adj) {
 			Vertex<T>* w=it.dest;
@@ -211,6 +212,7 @@ vector<T> Graph<T>::getPath(const T &origin, const T &dest) const{
 		res.push_back(inf);
 		inf=this->findVertex(inf)->path->info;
 	}
+	res.push_back(origin);
 	reverse(res.begin(),res.end());
 	return res;
 }
